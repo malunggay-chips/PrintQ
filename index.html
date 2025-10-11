@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>PrintQ — quick print</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <h1>PrintQ</h1>
+      <p class="tag">Fast, easy printing — school-friendly</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <section id="step-1" class="card active">
+      <h2>Upload files & details</h2>
+      <form id="printForm">
+        <label class="row">
+          <span class="label">Files (images, doc, pdf) — multiple allowed</span>
+          <input id="files" type="file" name="files" accept=".pdf,image/*,.doc,.docx,.odt" multiple required />
+        </label>
+
+        <label class="row">
+          <span class="label">Name</span>
+          <input id="name" name="name" type="text" placeholder="Your full name" required />
+        </label>
+
+        <label class="row">
+          <span class="label">Phone / Mobile</span>
+          <input id="phone" name="phone" type="tel" placeholder="0917xxxxxxx" required />
+        </label>
+
+        <label class="row">
+          <span class="label">Pages / Images (per file total)</span>
+          <input id="pages" name="pages" type="number" min="1" value="1" required />
+        </label>
+
+        <label class="row">
+          <span class="label">Copies</span>
+          <input id="copies" name="copies" type="number" min="1" value="1" required />
+        </label>
+
+        <fieldset class="row radio-row">
+          <legend class="label">Color</legend>
+          <label><input type="radio" name="color" value="bw" checked /> Black & White (₱5/page)</label>
+          <label><input type="radio" name="color" value="color" /> Colored (₱10/page)</label>
+        </fieldset>
+
+        <fieldset class="row radio-row">
+          <legend class="label">Fulfillment</legend>
+          <label><input type="radio" name="fulfill" value="pickup" checked /> Pickup</label>
+          <label><input type="radio" name="fulfill" value="delivery" /> Delivery (₱20)</label>
+        </fieldset>
+
+        <label class="row hidden" id="locationRow">
+          <span class="label">Delivery location</span>
+          <input id="location" name="location" type="text" placeholder="House number, street, barangay..." />
+        </label>
+
+        <div class="row">
+          <button type="button" id="calcBtn" class="btn primary">Calculate</button>
+          <button type="submit" id="uploadPayBtn" class="btn secondary" disabled>Upload & Pay</button>
+        </div>
+
+        <div id="calcResult" class="calc-result" aria-live="polite"></div>
+      </form>
+    </section>
+
+    <!-- Hidden status section — only accessible if user clicks 'Status' button in footer -->
+    <section id="status-section" class="card hidden">
+      <h2>Check Print Status</h2>
+      <label class="row">
+        <span class="label">Enter Unique Print ID (e.g. Print-1234)</span>
+        <input id="statusPrintId" type="text" placeholder="Print-XXXX" />
+      </label>
+      <div class="row">
+        <button id="checkStatusBtn" class="btn primary">Check Status</button>
+      </div>
+      <div id="statusResult" class="status-result"></div>
+    </section>
+  </main>
+
+  <!-- popup for Print ID -->
+  <div id="popup" class="popup hidden" role="dialog" aria-modal="true">
+    <div class="popup-card">
+      <h3>Print created</h3>
+      <p>Your unique Print ID:</p>
+      <div class="print-id-row">
+        <code id="printIdText">Print-0000</code>
+        <button id="copyBtn" class="btn tiny">Copy</button>
+      </div>
+      <p class="note">Close this popup manually to proceed to payment.</p>
+      <div class="row">
+        <button id="closePopupBtn" class="btn primary">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>© PrintQ</div>
+      <div><button id="showStatusSection" class="link-btn">Check Status</button></div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
